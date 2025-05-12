@@ -1,0 +1,25 @@
+import numpy as np # библиотека для работы с массивами и математическими операциями
+import matplotlib.pyplot as plt # библиотека для визуализации 
+
+# генерируем массив x
+x = np.linspace(0, 10, 100)
+
+# вычисляем y и z
+y = np.sin(x)
+z = np.cos(x)
+
+# создаем график
+plt.figure(figsize=(10, 6))  # Размер графика
+
+# строем графики
+plt.plot(x, y, label='sin(x)', color='pink')
+plt.plot(x, z, label='cos(x)', color='#C2C1F2')
+
+# добавляем заголовки и подписи осей
+plt.title('Графики функций sin(x) и cos(x)')
+plt.xlabel('x')
+plt.ylabel('y, z')
+
+plt.legend() # добавляем легенды
+plt.grid(True) # отображение сетки
+plt.show() # выводим график
