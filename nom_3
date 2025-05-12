@@ -1,0 +1,19 @@
+import numpy as np # библиотека для работы с массивами и математическими операциями
+
+# создаем матрицу 5x5 со случайными целыми числами от 1 до 10
+matrix = np.random.randint(1, 11, size=(5, 5))
+
+print("Исходная матрица:")
+print(matrix)
+
+# вычисляем характеристики
+mean_value = np.mean(matrix) # ср знач
+max_value = np.max(matrix)
+min_value = np.min(matrix)
+column_sums = np.sum(matrix, axis=0)
+
+# выводим результаты
+print("\n1. Среднее значение матрицы:", mean_value)
+print("2. Максимальный элемент матрицы:", max_value)
+print("3. Минимальный элемент матрицы:", min_value)
+print("4. Суммы по столбцам:", column_sums)
