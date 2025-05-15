@@ -1,0 +1,53 @@
+import numpy as np # библиотека для работы с  массивами и математическими операциями
+import matplotlib.pyplot as plt # библиотека для визуализации
+
+# создаем фигуру с 3 объектами (для 3 графиков)
+fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 12)) # (кол-во строк, кол-во столбц, размер табл в дюймах)
+fig.suptitle('Графики с разными типами визуализации', fontsize=16)
+
+# линейный график y = x**2
+x = np.linspace(0, 10, 50) # создаём массив из 50 равноотстоящих точек(начальное знач, конечное знач, кол-во точек)
+y = x**2
+ax1.plot(x, y, 'c-', linewidth=2) # строим линейный график на оси ax1
+ax1.set_title('1. Линейный график: y = x²') #устанавливаем заголовок
+ax1.set_xlabel('x')
+ax1.set_ylabel('y')
+ax1.grid(True, linestyle='--', alpha=0.7)
+
+# точечный график случайных точек
+np.random.seed(42)  # фиксируем случайное число для воспроизвод. результата
+x_rand = np.random.rand(30) * 10 # 30 чисел от 0 до 1, умножение на 10 расширяет диапазон до [0, 10)
+y_rand = np.random.rand(30) * 100
+colors = np.random.rand(30)
+sizes = np.random.randint(50, 300, 30) # случайные размеры точек от 50 до 300
+
+scatter = ax2.scatter(x_rand, y_rand, c=colors, s=sizes, alpha=0.7, cmap='Pastel1')
+ax2.set_title('2. Точечный график случайных данных')
+ax2.set_xlabel('X значения')
+ax2.set_ylabel('Y значения')
+ax2.grid(True, linestyle=':', alpha=0.5)
+fig.colorbar(scatter, ax=ax2, label='Цветовые значения')
+
+# столбчатая диаграмма для категориальных данных
+categories = ['A', 'B', 'C']
+values = [3, 7, 2]
+colors = ['#D9B2A9', '#F2DBD5', '#F4EEED']
+
+bars = ax3.bar(categories, values, color=colors, edgecolor='black', alpha=0.8)
+ax3.set_title('3. Столбчатая диаграмма')
+ax3.set_xlabel('Категории')
+ax3.set_ylabel('Значения')
+ax3.grid(axis='y', linestyle='--', alpha=0.3)
+
+# добавляем значения на столбцы
+for bar in bars: # цикл по всем столбцам
+    height = bar.get_height() # возвращает числовое значение столбца
+    ax3.text(bar.get_x() # возвращает X-координату левого края столбца
+              + bar.get_width()/2., # возвращает ширину столбца(/2 — нахождение центра столбца)
+              height, # текст размещается на уровне верхнего края столбца
+              f'{height}', # преобразует число в строку 
+              ha='center', va='bottom') # выравниваем текст по центру и по нижнему краю
+
+# регулируем расстояние между графиками
+plt.tight_layout(pad=3.0) # отступ в дюймах
+plt.show()
